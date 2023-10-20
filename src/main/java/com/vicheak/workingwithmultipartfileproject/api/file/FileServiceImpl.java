@@ -26,6 +26,20 @@ public class FileServiceImpl implements FileService {
     @Value("${file.base-uri}")
     private String fileBaseUri;
 
+    @Value("${file.download-uri}")
+    private String fileDownloadUri;
+
+    @Override
+    public Resource download(String name) {
+        Path path = Paths.get(serverPath + name);
+
+        if (Files.exists(path)) {
+            return UrlResource.from(path.toUri());
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                "Resource does not exist!");
+    }
+
     @Override
     public FileDto singleUpload(MultipartFile file) {
         return this.save(file);
@@ -47,6 +61,7 @@ public class FileServiceImpl implements FileService {
             return FileDto.builder()
                     .name(name)
                     .fileBaseUri(fileBaseUri + name)
+                    .downloadUri(fileDownloadUri + name)
                     .size(resource.contentLength())
                     .extension(this.getExtension(name))
                     .build();
@@ -80,6 +95,7 @@ public class FileServiceImpl implements FileService {
                 fileDtoList.add(FileDto.builder()
                         .name(p.getFileName().toString())
                         .fileBaseUri(fileBaseUri + p.getFileName().toString())
+                        .downloadUri(fileDownloadUri + p.getFileName().toString())
                         .size(UrlResource.from(p.toUri()).contentLength())
                         .extension(this.getExtension(p.getFileName().toString()))
                         .build());
@@ -171,6 +187,7 @@ public class FileServiceImpl implements FileService {
         return FileDto.builder()
                 .name(name)
                 .fileBaseUri(fileBaseUri + name)
+                .downloadUri(fileDownloadUri + name)
                 .size(file.getSize())
                 .extension(extension)
                 .build();
