@@ -15,6 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -150,9 +151,10 @@ public class FileServiceImpl implements FileService {
             else {
                 //update here
                 //cut the extension from old name
+                assert oldName != null;
                 int lastDotIndex = oldName.lastIndexOf(".");
                 String oldUuid = oldName.substring(0, lastDotIndex);
-                String extension = this.getExtension(file.getOriginalFilename());
+                String extension = this.getExtension(Objects.requireNonNull(file.getOriginalFilename()));
                 String newName = oldUuid + "." + extension;
 
                 path = Paths.get(serverPath + newName);
@@ -173,7 +175,7 @@ public class FileServiceImpl implements FileService {
         if (file.isEmpty())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "File is empty! try again");
 
-        String extension = this.getExtension(file.getOriginalFilename());
+        String extension = this.getExtension(Objects.requireNonNull(file.getOriginalFilename()));
         String name = UUID.randomUUID() + "." + extension;
 
         Path path = Paths.get(serverPath + name);
