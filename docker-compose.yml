@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  spring-api:
+    image: spring-app
+    container_name: spring-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5200:8080"
+    volumes:
+      - ../workspace:/workspace
+    networks:
+      - api-network
+
+networks:
+  api-network:
