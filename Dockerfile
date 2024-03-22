@@ -7,8 +7,8 @@ RUN gradle build
 # Stage 2: Runtime image
 FROM openjdk:21
 RUN mkdir -p app
-COPY --from=build /home/gradle/src/build/libs/*.jar /app/
+COPY --from=build /home/gradle/src/build/libs/working-with-multipart-file.jar /app/working-with-multipart-file.jar 
 VOLUME /workspace
 
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","-Dserver.port=8080","-Dspring.profiles.active=prod","/app/*.jar"]
+ENTRYPOINT ["java","-jar","-Dserver.port=8080","-Dspring.profiles.active=prod","/app/working-with-multipart-file.jar"]
