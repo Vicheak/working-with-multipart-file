@@ -7,7 +7,7 @@ RUN gradle build
 # Stage 2: Runtime image
 FROM openjdk:21
 RUN mkdir -p app
-ADD --from=build /home/gradle/src/build/libs/*.jar /app/app.jar 
+COPY --from=build /home/gradle/src/build/libs/*.jar /app/app.jar 
 VOLUME /workspace
 
 EXPOSE 8080
