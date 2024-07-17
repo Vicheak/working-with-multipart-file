@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.vicheak'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0beta'
 
 java {
     sourceCompatibility = '17'
@@ -31,9 +31,9 @@ sonar {
 
 dependencies {
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

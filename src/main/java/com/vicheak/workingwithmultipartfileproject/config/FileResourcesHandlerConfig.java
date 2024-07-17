@@ -19,4 +19,5 @@ public class FileResourcesHandlerConfig implements WebMvcConfigurer {
         registry.addResourceHandler(clientPath)
                 .addResourceLocations("file:" + serverPath);
     }
+
 }

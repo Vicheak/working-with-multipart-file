@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface FileService {
+
     Resource download(String name);
 
     FileDto singleUpload(MultipartFile file);

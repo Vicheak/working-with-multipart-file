@@ -57,7 +57,7 @@ public class FileController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping()
+    @DeleteMapping
     public void deleteAll() {
         fileService.deleteAll();
     }
